@@ -1,5 +1,5 @@
-// Winning codes stored in uppercase
-const winningCodes = ["WIN123", "LUCKY456", "PRIZE789"];
+// Winning shutdown codes (case insensitive)
+const shutdownCodes = ["dino123"];
 let attempts = 0;
 const maxAttempts = 3;
 
@@ -18,23 +18,23 @@ inputField.addEventListener("keypress", function (event) {
 function checkCode() {
   if (attempts >= maxAttempts) return; // No further attempts if game over
 
-  // Convert user input to uppercase to ensure case insensitivity
-  const userCode = inputField.value.trim().toUpperCase();
+  // Convert user input to lowercase to ensure case insensitivity
+  const userCode = inputField.value.trim().toLowerCase();
   inputField.value = ""; // Clear the input
-  let message = `> ${userCode}\n`;
+  let message = `> ${userCode.toUpperCase()}\n`;
 
-  if (winningCodes.includes(userCode)) {
-    message += "ACCESS GRANTED - ✅ You Won! ✅\n";
+  if (shutdownCodes.includes(userCode)) {
+    message += "✅ SUCCESS! T-Robot has been defeated! ✅\n";
     outputMessage(message);
     disableInput();
   } else {
     attempts++;
     if (attempts >= maxAttempts) {
-      message += "ACCESS DENIED - ❌ GAME OVER ❌\n";
+      message += "❌ SYSTEM FAILURE! T-Robot has won! ❌\n";
       outputMessage(message);
       disableInput();
     } else {
-      message += `ACCESS DENIED - ❌ Invalid Code (${attempts}/${maxAttempts}) ❌\n`;
+      message += `❌ Incorrect Code (${attempts}/${maxAttempts}) - Try again! ❌\n`;
       outputMessage(message);
     }
   }
@@ -44,7 +44,6 @@ function outputMessage(message) {
   const para = document.createElement("p");
   para.textContent = message;
   outputDiv.appendChild(para);
-  // Auto-scroll to the bottom of the terminal
   document.getElementById("terminal").scrollTop =
     document.getElementById("terminal").scrollHeight;
 }
@@ -52,5 +51,5 @@ function outputMessage(message) {
 function disableInput() {
   inputField.disabled = true;
   submitBtn.disabled = true;
-  inputField.placeholder = "Game Over.";
+  inputField.placeholder = "Mission Failed. Refresh to retry.";
 }
