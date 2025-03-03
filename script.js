@@ -1,5 +1,5 @@
 // Winning shutdown codes (case insensitive)
-const shutdownCodes = ["dino123"];
+const shutdownCodes = ["tr-ex1993", "stop-trobot", "dino123"];
 let attempts = 0;
 const maxAttempts = 3;
 
@@ -24,17 +24,17 @@ function checkCode() {
   let message = `> ${userCode.toUpperCase()}\n`;
 
   if (shutdownCodes.includes(userCode)) {
-    message += "✅ MISSION SUCCESS! T-Robot has been defeated! ✅\n";
+    message += "✅ MISSION SUCCESS! T-Robot has been defeated! ✅";
     outputMessage(message);
     disableInput(true); // Pass `true` to indicate success
   } else {
     attempts++;
     if (attempts >= maxAttempts) {
-      message += "❌ MISSION FAILED! T-Robot has won! ❌\n";
+      message += "❌ MISSION FAILED! T-Robot has won! ❌";
       outputMessage(message);
       disableInput(false); // Pass `false` to indicate failure
     } else {
-      message += `❌ Incorrect Code (${attempts}/${maxAttempts}) - Try again! ❌\n`;
+      message += `❌ Incorrect Code (${attempts}/${maxAttempts}) - Try again! ❌`;
       outputMessage(message);
     }
   }
