@@ -24,15 +24,15 @@ function checkCode() {
   let message = `> ${userCode.toUpperCase()}\n`;
 
   if (shutdownCodes.includes(userCode)) {
-    message += "✅ SUCCESS! T-Robot has been defeated! ✅\n";
+    message += "✅ MISSION SUCCESS! T-Robot has been defeated! ✅\n";
     outputMessage(message);
-    disableInput();
+    disableInput(true); // Pass `true` to indicate success
   } else {
     attempts++;
     if (attempts >= maxAttempts) {
-      message += "❌ SYSTEM FAILURE! T-Robot has won! ❌\n";
+      message += "❌ MISSION FAILED! T-Robot has won! ❌\n";
       outputMessage(message);
-      disableInput();
+      disableInput(false); // Pass `false` to indicate failure
     } else {
       message += `❌ Incorrect Code (${attempts}/${maxAttempts}) - Try again! ❌\n`;
       outputMessage(message);
@@ -48,8 +48,10 @@ function outputMessage(message) {
     document.getElementById("terminal").scrollHeight;
 }
 
-function disableInput() {
+function disableInput(isSuccess) {
   inputField.disabled = true;
   submitBtn.disabled = true;
-  inputField.placeholder = "Mission Failed. Refresh to retry.";
+  inputField.placeholder = isSuccess
+    ? "MISSION SUCCESS! Refresh to play again."
+    : "MISSION FAILED. Refresh to retry.";
 }
