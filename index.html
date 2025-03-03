@@ -1,77 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Terminal</title>
-    <style>
-        body {
-            background-color: black;
-            color: lime;
-            font-family: "Courier New", monospace;
-            text-align: left;
-            padding: 20px;
-        }
-        #terminal {
-            border: 2px solid lime;
-            padding: 20px;
-            width: 500px;
-            height: 300px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-        }
-        .input-line {
-            display: flex;
-            align-items: center;
-        }
-        .input-line span {
-            color: lime;
-        }
-        #codeInput {
-            background: black;
-            border: none;
-            color: lime;
-            font-family: "Courier New", monospace;
-            font-size: 16px;
-            outline: none;
-            width: 200px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Checker Terminal</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
+  <div id="terminal-container">
     <div id="terminal">
-        <p>Welcome to the Code Checker Terminal</p>
-        <p>Enter your code and press Enter:</p>
-        <div id="output"></div>
-        <div class="input-line">
-            <span>&gt; </span>
-            <input type="text" id="codeInput" autofocus onkeypress="handleKeyPress(event)">
-        </div>
+      <p>Welcome to the Code Checker Terminal</p>
+      <p>Enter your code and press the button or hit Enter:</p>
+      <div id="output"></div>
     </div>
-
-    <script>
-        const winningCodes = ["WIN123", "LUCKY456", "PRIZE789"]; // Define winning codes
-        const outputDiv = document.getElementById("output");
-        const inputField = document.getElementById("codeInput");
-
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                const userCode = inputField.value.trim().toUpperCase();
-                inputField.value = ""; // Clear input
-                let message = `> ${userCode}\n`;
-
-                if (winningCodes.includes(userCode)) {
-                    message += "ACCESS GRANTED - 🎉 You Won! 🎉\n";
-                } else {
-                    message += "ACCESS DENIED - ❌ Invalid Code\n";
-                }
-
-                outputDiv.innerHTML += `<p>${message}</p>`;
-                document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
-            }
-        }
-    </script>
-
+    <input
+      type="text"
+      id="codeInput"
+      placeholder="Enter your code here"
+      autofocus
+    />
+    <div id="buttons">
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
