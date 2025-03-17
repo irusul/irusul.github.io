@@ -1,5 +1,5 @@
-// Winning shutdown codes (case insensitive)
-const shutdownCodes = ["tr-ex1993", "stop-trobot", "dino123"];
+// Gewinner-Codes (Groß-/Kleinschreibung wird ignoriert)
+const shutdownCodes = ["code123"];
 let attempts = 0;
 const maxAttempts = 3;
 
@@ -7,7 +7,7 @@ const outputDiv = document.getElementById("output");
 const inputField = document.getElementById("codeInput");
 const submitBtn = document.getElementById("submitBtn");
 
-// Submit code on button click or when the Enter key is pressed
+// Überprüfung beim Klicken auf den Button oder Drücken der Enter-Taste
 submitBtn.addEventListener("click", checkCode);
 inputField.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
@@ -16,25 +16,25 @@ inputField.addEventListener("keypress", function (event) {
 });
 
 function checkCode() {
-  if (attempts >= maxAttempts) return; // No further attempts if game over
+  if (attempts >= maxAttempts) return; // Keine weiteren Versuche nach Spielende
 
-  // Convert user input to lowercase to ensure case insensitivity
+  // Eingabe in Kleinbuchstaben umwandeln, um Groß-/Kleinschreibung zu ignorieren
   const userCode = inputField.value.trim().toLowerCase();
-  inputField.value = ""; // Clear the input
+  inputField.value = ""; // Eingabefeld leeren
   let message = `> ${userCode.toUpperCase()}\n`;
 
   if (shutdownCodes.includes(userCode)) {
-    message += "✅ MISSION SUCCESS! T-Robot has been defeated! ✅";
+    message += "✅ MISSION ERFOLGREICH! Du hast T-Robot deaktiviert und bist frei! ✅";
     outputMessage(message);
-    disableInput(true); // Pass `true` to indicate success
+    disableInput(true);
   } else {
     attempts++;
     if (attempts >= maxAttempts) {
-      message += "❌ MISSION FAILED! T-Robot has won! ❌";
+      message += "❌ MISSION GESCHEITERT! T-Robot hat die Kontrolle behalten! ❌";
       outputMessage(message);
-      disableInput(false); // Pass `false` to indicate failure
+      disableInput(false);
     } else {
-      message += `❌ Incorrect Code (${attempts}/${maxAttempts}) - Try again! ❌`;
+      message += `❌ Falscher Code (${attempts}/${maxAttempts}) - Versuche es erneut! ❌`;
       outputMessage(message);
     }
   }
@@ -52,6 +52,6 @@ function disableInput(isSuccess) {
   inputField.disabled = true;
   submitBtn.disabled = true;
   inputField.placeholder = isSuccess
-    ? "MISSION SUCCESS! Refresh to play again."
-    : "MISSION FAILED. Refresh to retry.";
+    ? "MISSION ERFOLGREICH! Aktualisiere die Seite, um erneut zu spielen."
+    : "MISSION GESCHEITERT. Aktualisiere die Seite, um es erneut zu versuchen.";
 }

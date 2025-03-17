@@ -1,32 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Escape Room Puzzle: Defeat T-Robot</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div id="terminal-container">
-    <div id="terminal">
-      <p>🟢 SYSTEM BOOTING... 🟢</p>
-      <p>🚨 WARNING: T-Robot has taken over! 🚨</p>
-      <p>
-        T-Robot, a malicious dino robot, has infiltrated the school and is about to delete all your homework!  
-        Solve the tech puzzles to uncover the shutdown code before it's too late!
-      </p>
-      <div id="output"></div>
-    </div>
-    <input
-      type="text"
-      id="codeInput"
-      placeholder="Enter shutdown code..."
-      autofocus
-    />
-    <div id="buttons">
-      <button id="submitBtn">Submit Code</button>
-    </div>
-  </div>
-  <script src="script.js"></script>
-</body>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Room - Besiege T-Robot</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Escape Room Puzzle: Besiege T-Robot</h1>
+    </header>
+    <main>
+      <section id="introduction">
+        <p>
+          T-Robot, ein böser mechanischer Wächter, hat dich in einem hochmodernen Raum
+          eingesperrt.<br />
+          Um zu entkommen, musst du eine Reihe von technologiebezogenen Herausforderungen
+          lösen.<br />
+          Jede gemeisterte Herausforderung liefert dir einen entscheidenden Schlüssel, um
+          die Tür des Escape Rooms zu entriegeln und deine Freiheit zu sichern.
+        </p>
+        <p>
+          Nach Abschluss einer Aufgabe erhältst du einen Umschlag mit einer Nummer.<br />
+          Die Codes in den Umschlägen der Herausforderungen bilden das Passwort,<br />
+          das benötigt wird, um die Verteidigungsmechanismen von T-Robot zu deaktivieren.
+        </p>
+        <p>⚠️ Du hast nur drei (3) Versuche!</p>
+      </section>
+
+      <section id="game">
+        <div id="terminal">
+          <p>&gt; Gib den Code ein und drücke ENTER oder den Button.</p>
+          <div id="output"></div>
+        </div>
+        <div id="controls">
+          <input
+            type="text"
+            id="codeInput"
+            placeholder="Gib den Code hier ein..."
+            maxlength="20"
+          />
+          <button id="submitBtn">Überprüfen</button>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <script src="script.js"></script>
+    </footer>
+  </body>
 </html>
