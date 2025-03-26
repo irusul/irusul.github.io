@@ -3,59 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Escape Room</title>
+    <title>Escape Room - Defeat T-Robot / Besiege T-Robot</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
-      <h1 id="pageTitle">Escape Room Puzzle: Defeat T-Robot</h1>
-      <select id="languageSelect">
-        <option value="en">English</option>
-        <option value="de">Deutsch</option>
-      </select>
+      <h1 id="pageTitle">Escape Room: Defeat T-Robot</h1>
+      <div id="languageContainer">
+        <label for="languageSelect">🌐</label>
+        <select id="languageSelect">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
     </header>
     <main>
-      <!-- Introduction: Two versions, only one visible at a time -->
+      <!-- Shortened Introduction -->
       <section id="introduction-en" class="introduction">
-        <p>
-          T-Robot, a malicious mechanical guardian, has locked you in a state-of-the-art room.<br />
-          To escape, you must solve a series of technology-related challenges.<br />
-          Each challenge you master provides a crucial key to unlock the escape room door and secure your freedom.
-        </p>
-        <p>
-          After completing each challenge, you will receive an envelope with a number.<br />
-          The codes in the envelopes form the password needed to disable T-Robot’s defense mechanisms.
-        </p>
-        <p>⚠️ You only have three (3) attempts!</p>
+        <p>T-Robot has trapped you! Solve tech challenges to escape.</p>
+        <p>Find the right codes to disable its defenses. Three (3) attempts only!</p>
       </section>
 
       <section id="introduction-de" class="introduction" style="display: none;">
-        <p>
-          T-Robot, ein böser mechanischer Wächter, hat dich in einem hochmodernen Raum eingesperrt.<br />
-          Um zu entkommen, musst du eine Reihe von technologiebezogenen Herausforderungen lösen.<br />
-          Jede gemeisterte Herausforderung liefert dir einen entscheidenden Schlüssel, um die Tür des Escape Rooms zu entriegeln und deine Freiheit zu sichern.
-        </p>
-        <p>
-          Nach Abschluss einer Aufgabe erhältst du einen Umschlag mit einer Nummer.<br />
-          Die Codes in den Umschlägen der Herausforderungen bilden das Passwort, das benötigt wird, um die Verteidigungsmechanismen von T-Robot zu deaktivieren.
-        </p>
-        <p>⚠️ Du hast nur drei (3) Versuche!</p>
+        <p>T-Robot hat dich eingesperrt! Löse Technikrätsel, um zu entkommen.</p>
+        <p>Finde die richtigen Codes, um seine Verteidigung zu deaktivieren. Nur drei (3) Versuche!</p>
       </section>
 
       <!-- Game Section -->
       <section id="game">
         <div id="terminal">
-          <p id="terminalInstruction">&gt; Enter the code and press ENTER or the button.</p>
+          <p id="terminalInstruction">&gt; Enter the code and press ENTER.</p>
           <div id="output"></div>
         </div>
         <div id="controls">
-          <input
-            type="text"
-            id="codeInput"
-            placeholder="Enter the code here..."
-            maxlength="20"
-          />
-          <button id="submitBtn">Submit Code</button>
+          <input type="text" id="codeInput" placeholder="Enter code..." maxlength="20" />
+          <button id="submitBtn">Submit</button>
         </div>
       </section>
     </main>

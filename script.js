@@ -1,28 +1,26 @@
-// Translations for dynamic texts
+// Language translations
 const translations = {
   en: {
-    pageTitle: "Escape Room Puzzle: Defeat T-Robot",
-    terminalInstruction: "> Enter the code and press ENTER or the button.",
-    submitBtn: "Submit Code",
-    inputPlaceholder: "Enter the code here...",
-    success: "✅ MISSION SUCCESS! You have defeated T-Robot and are free! ✅",
-    failure: "❌ MISSION FAILED! T-Robot has maintained control! ❌",
+    pageTitle: "Escape Room: Defeat T-Robot",
+    terminalInstruction: "> Enter the code and press ENTER.",
+    submitBtn: "Submit",
+    inputPlaceholder: "Enter code...",
+    success: "✅ MISSION SUCCESS! You escaped! ✅",
+    failure: "❌ MISSION FAILED! T-Robot won! ❌",
     wrong: (attempt, max) => `❌ Wrong Code (${attempt}/${max}) - Try again! ❌`
   },
   de: {
-    pageTitle: "Escape Room Puzzle: Besiege T-Robot",
-    terminalInstruction: "> Gib den Code ein und drücke ENTER oder den Button.",
+    pageTitle: "Escape Room: Besiege T-Robot",
+    terminalInstruction: "> Gib den Code ein und drücke ENTER.",
     submitBtn: "Überprüfen",
-    inputPlaceholder: "Gib den Code hier ein...",
-    success: "✅ MISSION ERFOLGREICH! Du hast T-Robot deaktiviert und bist frei! ✅",
-    failure: "❌ MISSION GESCHEITERT! T-Robot hat die Kontrolle behalten! ❌",
-    wrong: (attempt, max) => `❌ Falscher Code (${attempt}/${max}) - Versuche es erneut! ❌`
+    inputPlaceholder: "Code eingeben...",
+    success: "✅ MISSION ERFOLGREICH! Du bist entkommen! ✅",
+    failure: "❌ MISSION GESCHEITERT! T-Robot hat gewonnen! ❌",
+    wrong: (attempt, max) => `❌ Falscher Code (${attempt}/${max}) - Erneut versuchen! ❌`
   }
 };
 
-let currentLanguage = "en"; // Default language
-
-// Game Variables
+let currentLanguage = "en";
 const shutdownCodes = {
   en: ["code123"],
   de: ["code123"]
@@ -35,27 +33,18 @@ const inputField = document.getElementById("codeInput");
 const submitBtn = document.getElementById("submitBtn");
 const languageSelect = document.getElementById("languageSelect");
 
-// Update UI based on current language
+// Update UI for language change
 function updateLanguage() {
-  // Update header title
   document.getElementById("pageTitle").textContent = translations[currentLanguage].pageTitle;
-  
-  // Show/hide introduction sections
-  if (currentLanguage === "en") {
-    document.getElementById("introduction-en").style.display = "block";
-    document.getElementById("introduction-de").style.display = "none";
-  } else {
-    document.getElementById("introduction-en").style.display = "none";
-    document.getElementById("introduction-de").style.display = "block";
-  }
-  
-  // Update terminal instruction, input placeholder, and button text
   document.getElementById("terminalInstruction").textContent = translations[currentLanguage].terminalInstruction;
   inputField.placeholder = translations[currentLanguage].inputPlaceholder;
   submitBtn.textContent = translations[currentLanguage].submitBtn;
+
+  document.getElementById("introduction-en").style.display = currentLanguage === "en" ? "block" : "none";
+  document.getElementById("introduction-de").style.display = currentLanguage === "de" ? "block" : "none";
 }
 
-// Event listener for language change
+// Language selection event
 languageSelect.addEventListener("change", function() {
   currentLanguage = languageSelect.value;
   updateLanguage();
@@ -64,22 +53,21 @@ languageSelect.addEventListener("change", function() {
 // Initial UI update
 updateLanguage();
 
-// Event listeners for code submission
+// Check Code Function
 submitBtn.addEventListener("click", checkCode);
-inputField.addEventListener("keypress", function (event) {
+inputField.addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
     checkCode();
   }
 });
 
 function checkCode() {
-  if (attempts >= maxAttempts) return; // No further attempts if game is over
+  if (attempts >= maxAttempts) return;
 
   const userCode = inputField.value.trim().toLowerCase();
   inputField.value = "";
   let message = `> ${userCode.toUpperCase()}\n`;
 
-  // Check if the code is correct (use language-specific code list if needed)
   if (shutdownCodes[currentLanguage].includes(userCode)) {
     message += translations[currentLanguage].success;
     outputMessage(message);
@@ -101,18 +89,17 @@ function outputMessage(message) {
   const para = document.createElement("p");
   para.textContent = message;
   outputDiv.appendChild(para);
-  document.getElementById("terminal").scrollTop =
-    document.getElementById("terminal").scrollHeight;
+  document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
 }
 
 function disableInput(isSuccess) {
   inputField.disabled = true;
   submitBtn.disabled = true;
   inputField.placeholder = isSuccess
-    ? (currentLanguage === "en"
-         ? "MISSION SUCCESS! Refresh the page to play again."
-         : "MISSION ERFOLGREICH! Aktualisiere die Seite, um erneut zu spielen.")
-    : (currentLanguage === "en"
-         ? "MISSION FAILED. Refresh the page to try again."
-         : "MISSION GESCHEITERT. Aktualisiere die Seite, um es erneut zu versuchen.");
+    ? currentLanguage === "en"
+      ? "MISSION SUCCESS! Refresh to play again."
+      : "MISSION ERFOLGREICH! Aktualisiere zum Neustart."
+    : currentLanguage === "en"
+      ? "MISSION FAILED. Refresh to retry."
+      : "MISSION GESCHEITERT. Aktualisiere zum Versuch.";
 }
